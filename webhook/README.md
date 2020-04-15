@@ -1,5 +1,50 @@
-## 接受记录数据推送
-###数据示例
+## 记录数据推送（webhook）
+
+### 字段说明
+|参数|描述|
+|:----|:---|
+|record_id|记录唯一ID|
+|code_id|码唯一ID|
+|tpl_id|记录模板唯一ID|
+|add_time|记录添加时间|
+|recorder|记录人|
+|content|记录内容|
+|&emsp;field_id|组件唯一ID|
+|&emsp;title|组件名称（参见 **组件类型** 说明）|
+|&emsp;type|组件类型（参见 **组件类型** 说明）|
+|&emsp;value|组件值（参见 **组件类型** 说明）|
+
+
+### 组件类型
+|组件名称|组件描述|值类型|值描述|
+|:----|:----|:----|:----|
+|text|单行文本|文本|示例：这是一个单选文本|
+|textarea|多行文本|文本|示例：这是多行文本第一行\n这是多行文本第二行|
+|number|数字|数字|示例：21364|
+|date|日期|日期|示例：2020-04-07|
+|time|时间|时间|示例|示例：03:02|
+|radio|单选|文本|示例：<br>&emsp;正常单选：选项1<br>&emsp;勾选其他：其他[这是单选其他]|
+|checkbox|多选|数组|示例：<br>&emsp;正常多选：["选项1", "选项2"]<br>&emsp;勾选其他：["选项1", "其他[这是多选其他]"]|
+|image|图片组件|数组|示例：[{"url":"https:\/\/ncstatic.clewm.net\/rsrc\/2020\/0407\/16\/17bb81085ad1c35c53a37624aad30c27.jpg","is_onlocal":"1"}]<br>url：图片地址<br>is_onlocal：是否现场拍摄（0否/1是）|
+|checklist|检查项|数组|示例：[{"title":"检查项1","value":"1"},{"title":"检查项2","value":"2"}]<br>title：检查项名称；value：1（√）/2（✗）|
+|recorder|联系人|文本|示例：记录人|
+|tel|手机|手机格式|示例：13567945671|
+|address|定位|数组|示例：{"address":"浙江省宁波市海曙区后河巷17号(先进制造业公共培训平台-B座西南51米)","lat":29.879169921875,"log":121.53221950955}<br>address：详细地址<br>lat/log：经纬度|
+|audio|录音|数组|示例：[{"url":"https:\/\/tcview-nc.clewm.net\/dd5507d7d4aec18dfbb90df7a9660a5e.mp3"}]<br>url：音频地址|
+|video|视频|数组|示例：[{"url":"https:\/\/tcview-nc.clewm.net\/a08972fd6719fcc4885364b33c4483e5.mp4"}]<br>url：视频地址|
+|identity|身份证|身份证格式|示例：342564197605210854|
+|owner_address|地址|文本|示例：河北省秦皇岛市北戴河区悦心花园6#808|
+|carnumber|车牌号|文本|示例：浙BRE9E3|
+|name|姓名|文本|示例：布朗|
+|sex|性别|文本|示例：男|
+|matrix|表格|数组|示例：[{"title":"项目1","value":"表格1"},{"title":"项目2","value":"表格2"}]<br>title：表格项目<br>value：表格内容|
+|chained_selects|多级下拉|数组|示例：浙江省/宁波市/海曙区/学校2|
+|signature|手写签名|数组|示例[{"url":"https:\/\/ncstatic.clewm.net\/rsrc\/2020\/0407\/16\/eeb403e1eabbb0ba43d16ccad308907c.png"}]<br>url：图片地址|
+|customer_number|自定义部署编号|文本|示例：123|
+|job_number|工号|文本|示例：100857|
+
+
+### 数据示例
 ```
 {
 	"record_id": 7414,
@@ -189,47 +234,8 @@
 	}]
 }
 ```
-### 字段说明
-|参数|描述|
-|:----|:---|
-|record_id|记录唯一ID|
-|code_id|码唯一ID|
-|tpl_id|记录模板唯一ID|
-|add_time|记录添加时间|
-|recorder|记录人|
-|content|记录内容|
-|&emsp;field_id|组件唯一ID|
-|&emsp;title|组件名称|
-|&emsp;type|组件类型（参见类型组件类型描述）|
-|&emsp;value|组件值|
 
-###组件类型
-|组件名称|组件描述|值类型|值描述|
-|:----|:----|:----|:----|
-|text|单行文本|文本|示例：这是一个单选文本|
-|textarea|多行文本|文本|示例：这是多行文本第一行\n这是多行文本第二行|
-|number|数字|数字|示例：21364|
-|date|日期|日期|示例：2020-04-07|
-|time|时间|时间|示例|示例：03:02|
-|radio|单选|文本|示例：<br>&emsp;正常单选：选项1<br>&emsp;勾选其他：其他[这是单选其他]|
-|checkbox|多选|数组|示例：<br>&emsp;正常多选：["选项1", "选项2"]<br>&emsp;勾选其他：["选项1", "其他[这是多选其他]"]|
-|image|图片组件|数组|示例：[{"url":"https:\/\/ncstatic.clewm.net\/rsrc\/2020\/0407\/16\/17bb81085ad1c35c53a37624aad30c27.jpg","is_onlocal":"1"}]<br>url：图片地址<br>is_onlocal：是否现场拍摄（0否/1是）|
-|checklist|检查项|数组|示例：[{"title":"检查项1","value":"1"},{"title":"检查项2","value":"2"}]<br>title：检查项名称；value：1（√）/2（✗）|
-|recorder|联系人|文本|示例：记录人|
-|tel|手机|手机格式|示例：13567945671|
-|address|定位|数组|示例：{"address":"浙江省宁波市海曙区后河巷17号(先进制造业公共培训平台-B座西南51米)","lat":29.879169921875,"log":121.53221950955}<br>address：详细地址<br>lat/log：经纬度|
-|audio|录音|数组|示例：[{"url":"https:\/\/tcview-nc.clewm.net\/dd5507d7d4aec18dfbb90df7a9660a5e.mp3"}]<br>url：音频地址|
-|video|视频|数组|示例：[{"url":"https:\/\/tcview-nc.clewm.net\/a08972fd6719fcc4885364b33c4483e5.mp4"}]<br>url：视频地址|
-|identity|身份证|身份证格式|示例：342564197605210854|
-|owner_address|地址|文本|示例：河北省秦皇岛市北戴河区悦心花园6#808|
-|carnumber|车牌号|文本|示例：浙BRE9E3|
-|name|姓名|文本|示例：布朗|
-|sex|性别|文本|示例：男|
-|matrix|表格|数组|示例：[{"title":"项目1","value":"表格1"},{"title":"项目2","value":"表格2"}]<br>title：表格项目<br>value：表格内容|
-|chained_selects|多级下拉|数组|示例：浙江省/宁波市/海曙区/学校2|
-|signature|手写签名|数组|示例[{"url":"https:\/\/ncstatic.clewm.net\/rsrc\/2020\/0407\/16\/eeb403e1eabbb0ba43d16ccad308907c.png"}]<br>url：图片地址|
-|customer_number|自定义部署编号|文本|示例：123|
-|job_number|工号|文本|示例：100857|
+
 
 
 
