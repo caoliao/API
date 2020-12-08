@@ -16,7 +16,7 @@
 
 ## 数据示例
 
-```json
+```
 [
   {
     "table_name": "table_D1",
@@ -61,7 +61,7 @@
 |p|int|当前分页，输入参数中的p的值|1|
 
 ## 数据示例
-```json
+```
 {
   "table_name": "table_D1",
   "alias_table_name": "巡检记录单",
